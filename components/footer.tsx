@@ -1,17 +1,25 @@
 import React from 'react'
 import Link from 'next/link'
+import { SiGithub } from 'react-icons/si'
+import { Button } from './ui/button'
 
 const Footer: React.FC = () => {
   return (
-    <footer className="w-full p-4 fixed bottom-0 flex justify-center bg-white shadow">
-      <Link
-        href="https://github.com/DervinEvolve/Journey1e"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-xl font-bold text-gray-700 hover:text-gray-900"
-      >
-        Almanac
-      </Link>
+    <footer className="w-fit p-1 md:p-2 fixed bottom-0 right-0">
+      <div className="flex justify-end">
+        <Button
+          variant={'ghost'}
+          size={'icon'}
+          className="text-muted-foreground/50 hover:text-muted-foreground"
+        >
+          <Link
+            href="https://github.com/DervinEvolve/Journey1e"
+            target="_blank"
+          >
+            <SiGithub size={18} />
+          </Link>
+        </Button>
+      </div>
     </footer>
   )
 }

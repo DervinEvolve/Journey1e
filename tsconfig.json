@@ -12,11 +12,22 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "types": [
+      "next",
+      "next/types/global",
+      "diff-match-patch",
+      "jsdom",
+      "prop-types",
+      "react-dom",
+      "react-syntax-highlighter",
+      "tough-cookie"
+    ],
     "plugins": [
       {
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     }
