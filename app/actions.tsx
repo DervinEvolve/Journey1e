@@ -106,7 +106,10 @@ async function submit(
 
     let action = { object: { next: 'proceed' } }
     // If the user skips the task, we proceed to the search
-    if (!skip) action = (await taskManager(messages)) ?? action
+    if (!skip) {
+      const result = (await taskManager(messages)) as TaskManagerResult | null
+      action = result ?? { object: { next: 'proceed' } }
+    }
 
     if (action.object.next === 'inquire') {
       // Generate inquiry
@@ -359,10 +362,10 @@ export const getUIStateFromAIState = (aiState: Chat) => {
   const chatId = aiState.chatId
   const isSharePage = aiState.isSharePage
 
-    // Ensure messages is an array of plain objects
-    const messages = Array.isArray(aiState.messages) 
-    ? aiState.messages.map(msg => ({...msg})) 
-    : [];
+  // Ensure messages is an array of plain objects
+  const messages = Array.isArray(aiState.messages)
+    ? aiState.messages.map(msg => ({ ...msg }))
+    : []
 
   return messages
     .map((message, index) => {
@@ -470,4 +473,10 @@ export const getUIStateFromAIState = (aiState: Chat) => {
       }
     })
     .filter(message => message !== null) as UIState
+}
+
+type TaskManagerResult = {
+  object: {
+    next: string
+  }
 }
